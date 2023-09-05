@@ -1,22 +1,16 @@
 import { UserFactory } from "./Factory/UserFactory";
-import { FileManager } from "./FileManager/FileManager";
 import { join } from 'path';
 
 async function main() {
-    const admin = UserFactory.create('admin');
-    const applicant = UserFactory.create('applicant');
-    const guest = UserFactory.create('guest');
-    
-    // const filePath = join(__dirname, 'fileToDelete.txt')
-    
-    const filePath = join(__dirname, 'file.txt')
-    const fileManager = new FileManager(filePath);
-    const data = await fileManager.read(applicant);
-    
-    await fileManager.write('\nzxcxz', applicant)
-    console.log(data);
+    const admin = UserFactory.createAdmin();
+    const applicant = UserFactory.createApplicant();
+    const guest = UserFactory.createGuest();
+        
+    const filepath = join(__dirname, 'file.txt')
+    admin.write(filepath, '\nzxczx');
+    guest.write(filepath, '\nzxczx');
 
-    // await fileManager.delete(admin)
+    applicant.delete(filepath);
 }
 
 main()
